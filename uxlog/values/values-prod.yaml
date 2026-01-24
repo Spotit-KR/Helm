@@ -8,7 +8,7 @@ ingress:
   className: "traefik"
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: team-io-kr-letsencrypt-prod
   hosts:
     - host: uxlog.team.io.kr
       paths:
