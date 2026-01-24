@@ -1,6 +1,8 @@
 nameOverride: "spotit-uxlog"
 fullnameOverride: "spotit-uxlog"
 
+replicaCount: 1
+
 ingress:
   enabled: true
   className: "traefik"
@@ -19,9 +21,6 @@ ingress:
 
 resources:
     requests:
-      memory: 2Gi
-      cpu: 300m
-    limits:
       memory: 2Gi
       cpu: 300m
 
@@ -49,11 +48,7 @@ livenessProbe:
   periodSeconds: 30
 
 autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 3
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+  enabled: false
 
 service:
   port: 8080
