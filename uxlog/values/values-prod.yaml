@@ -21,7 +21,7 @@ ingress:
 
 image:
   repository: "harbor.homelab.robinjoon.xyz/spotit/uxlog"
-  tag: "20260124-6"
+  tag: "20260124-7"
 
 imagePullSecrets:
   - name: "spotit-harbor-secret"
