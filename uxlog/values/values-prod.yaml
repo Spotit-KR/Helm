@@ -20,11 +20,11 @@ ingress:
         - uxlog.team.io.kr
 
 image:
-  repository: "harbor.homelab.robinjoon.xyz/growweek/backend"
+  repository: "harbor.homelab.robinjoon.xyz/spotit/uxlog"
   tag: "20260104-5"
 
 imagePullSecrets:
-  - name: "growweek-harbor-secret"
+  - name: "spotit-harbor-secret"
 
 ports:
   - containerPort: 8080 # 컨테이너 포트 명시
