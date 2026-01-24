@@ -20,10 +20,10 @@ ingress:
 resources:
     requests:
       memory: 2Gi
-      cpu: 200m
+      cpu: 300m
     limits:
       memory: 2Gi
-      cpu: 200m
+      cpu: 300m
 
 image:
   repository: "harbor.homelab.robinjoon.xyz/spotit/uxlog"
