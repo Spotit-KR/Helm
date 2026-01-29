@@ -1,0 +1,84 @@
+nameOverride: "spotit-prompt"
+fullnameOverride: "spotit-ptompt"
+
+replicaCount: 1
+
+ingress:
+  enabled: true
+  className: "traefik"
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    cert-manager.io/cluster-issuer: team-io-kr-letsencrypt-prod
+  hosts:
+    - host: prompt.team.io.kr
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: spotit-prompt-tls
+      hosts:
+        - prompt.team.io.kr
+
+resources:
+    requests:
+      memory: 2Gi
+      cpu: 300m
+
+image:
+  repository: "harbor.homelab.robinjoon.xyz/spotit/prompt"
+  tag: "20260124-9"
+
+imagePullSecrets:
+  - name: "spotit-harbor-secret"
+
+# 헬스체크 설정
+livenessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /
+    port: 3000
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 3
+
+autoscaling:
+  enabled: false
+
+service:
+  port: 3000
+
+# Environment variables from Secret
+# Secret 생성 방법: backend-secret.yaml 파일 생성 후 적용
+#
+# ---
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: backend-secret
+#   namespace: growweek
+# type: Opaque
+# stringData:
+#   SPRING_PROFILES_ACTIVE: "dev"
+#   DB_HOST: ""
+#   DB_PORT: ""
+#   DB_NAME: ""
+#   DB_USERNAME: ""
+#   DB_PASSWORD: ""
+#   JWT_SECRET: ""
+#   JWT_EXPIRATION: "3600000"
+#   GEMINI_API_KEY: ""
+# ---
+#
+# kubectl apply -f backend-secret.yaml
+envFrom:
+  - secretRef:
+      name: backend-secret
