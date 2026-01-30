@@ -26,7 +26,7 @@ resources:
 
 image:
   repository: "harbor.homelab.robinjoon.xyz/spotit/prompt"
-  tag: "20260130-10"
+  tag: "20260130-11"
 
 imagePullSecrets:
   - name: "spotit-harbor-secret"
