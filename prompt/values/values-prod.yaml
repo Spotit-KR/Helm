@@ -8,7 +8,7 @@ ingress:
   className: "traefik"
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
-    traefik.ingress.kubernetes.io/router.middlewares: kube-system-redirect-https@kubernetesresource
+    traefik.ingress.kubernetes.io/router.middlewares: kube-system-redirect-https@kubernetescrd
     cert-manager.io/cluster-issuer: team-io-kr-letsencrypt-prod
   hosts:
     - host: prompt.team.io.kr
